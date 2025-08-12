@@ -1,3 +1,5 @@
+# =========  AULA 2 - CONHECENDO OS DADOS E A BIBLIOTECA PANDAS =============
+import numpy as np
 import pandas
 
 #lendo a base de dados
@@ -84,5 +86,74 @@ data_frame['remoto'].value_counts()
 #print(data_frame.head())
 
 #exibindo informações de ocorrencias de colunas incluindo não númericas
-print(data_frame.describe(include='object'))
+#print(data_frame.describe(include='object'))
 
+# =========  AULA 2 - TRATAMENTO DE DADOS =============
+
+import numpy
+
+#procurando no data frame por valores nulos (não existentes)
+#print(data_frame.isnull())
+
+#fazendo contagem dos valores nulos
+#print(data_frame.isnull().sum())
+
+#verificando valores presenstes no campo 'ano'
+#nan = Not a Number
+#print(data_frame['ano'].unique())
+
+#exibindo as linhas com valores nulos
+#print(data_frame[data_frame.isnull().any(axis=1)])
+
+#--- Exemplo de Criação de Data Frame ---
+
+#data frame: salarios
+df_salarios = pandas.DataFrame({
+    'nome':['Ana','Brunos','Carlos','Daniele','Val'],
+    'salario':[4000,numpy.nan, 5000, numpy.nan, 100000]
+})
+
+#preenchendo campos vazio com a media e a mediana dos valores validos
+df_salarios['salario_media'] = df_salarios['salario'].fillna(df_salarios['salario'].mean().round(2))
+df_salarios['salario_mediana'] = df_salarios['salario'].fillna(df_salarios['salario'].median())
+#print(df_salarios)
+
+
+#data frame: Temperaturas
+df_temperatura = pandas.DataFrame({
+    'dia da semana':['seg','ter','qua','qui','sex'],
+    'temperatura':[30,np.nan,np.nan,28,27],
+})
+
+#preenchendo valores vazios com o valor do registro anterior e posterior
+df_temperatura['preenchido_ffill'] = df_temperatura['temperatura'].ffill() #anterior
+df_temperatura['preenchido_bfill'] = df_temperatura['temperatura'].bfill() #posterior
+#print(df_temperatura)
+
+
+#data frame: cidades
+df_cidades = pandas.DataFrame({
+    'nome':['Ana','Brunos','Carlos','Daniele','Val'],
+    'cidades':['São Paulo', np.nan, 'Curitiba', np.nan, 'Belem']
+})
+
+#preenchendo valores nulos com valores predefinidos
+df_cidades['cidade_preenchida'] = df_cidades['cidades'].fillna('Não Informado')
+#print(df_cidades)
+
+#-----------------------------------------------------
+
+#limpando dados nulos do data frame
+df_limpo = data_frame.dropna()
+#print(df_limpo.isnull().sum())
+
+#validadndo formatos dos campos
+#0 campo 'ano' está exibido com casas decimais
+#print(df_limpo.head())
+
+#print(df_limpo.info())
+
+#alterar o tipo de dado do campo ano de float para int
+df_limpo = df_limpo.assign(ano = df_limpo['ano'].astype('int64'))
+#print(df_limpo.head())
+#print(df_limpo.info())
