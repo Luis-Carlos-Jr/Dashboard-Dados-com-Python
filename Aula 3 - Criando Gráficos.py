@@ -275,7 +275,7 @@ ordem = df_limpo.groupby('senioridade')['usd'].mean().sort_values(ascending=Fals
 
 # ----------- Pizza ----------
 
-# # Calcula a média de salário por senioridade em gráfico de pizza interativo
+# # Calcula a proporção de senioridades em gráfico de pizza interativo
 # media = df_limpo.groupby("senioridade", as_index=False)["usd"].mean()#.sort_values(by="usd", ascending=False)
 #
 # # Ordena do maior para o menor
@@ -296,26 +296,37 @@ ordem = df_limpo.groupby('senioridade')['usd'].mean().sort_values(ascending=Fals
 # fig.update_traces(textinfo='percent+label')
 # fig.show()
 
-# ----------- Pizza filtrado ----------
-#desafio de construis um gráfico de pizza de salário de cientistas de dados por país
+# ----------- Desafio ----------
+#construir um gráfico que exiba o salário médio de Data Scientist por países
 
-# # Calcula a média de salário por senioridade em gráfico de pizza interativo
-# media = df_limpo.groupby("senioridade", as_index=False)["usd"].mean()#.sort_values(by="usd", ascending=False)
-#
-# # Ordena do maior para o menor
-# media = media.sort_values(by="usd", ascending=False)#.reset_index()
-#
-# #
-# contagem = df_limpo['remoto'].value_counts().reset_index()
-# contagem.columns = ['Tipo_trabalho', 'Quantidade']
-#
-# # Cria gráfico de barras
-# fig = px.pie(
-#     contagem,
-#     names = 'Tipo_trabalho',
-#     values = 'Quantidade',
-#     title='Porcentagem do tipo de trabalho',
-#     hole=0.5
-# )
-# fig.update_traces(textinfo='percent+label')
-# fig.show()
+# Importa as bibliotecas necessárias
+import pandas as pd
+import plotly.express as px
+
+# Carrega a base de dados
+data_frame = pd.read_csv("https://raw.githubusercontent.com/guilhermeonrails/data-jobs/refs/heads/main/salaries.csv")
+
+# Filtra o DataFrame para incluir apenas os registros onde o 'job_title' é 'Data Scientist'
+filtro_ds = df_limpo[df_limpo['cargo'] == 'Data Scientist']
+
+# Calcula a média salarial (em USD) para cada 'company_location'
+media_salarial = filtro_ds.groupby('residencia')['usd'].mean().reset_index()
+
+# Ordena os resultados pela média salarial de forma ascendente
+media_salarial_asc = media_salarial.sort_values(by='usd', ascending=True)
+
+# Cria o gráfico de barras interativo
+fig = px.bar(
+    media_salarial_asc,
+    x="residencia",
+    y="usd",
+    title="Média Salarial para 'Data Scientist' por Localidade",
+    labels={"residencia": "Residencia", "usd": "Salário Médio (USD)"},
+    color="residencia"
+)
+
+# Atualiza o layout do gráfico para ter um título mais claro
+fig.update_layout(title_text='Média Salarial de Data Scientist por Localidade')
+
+# Exibe o gráfico
+fig.show()
