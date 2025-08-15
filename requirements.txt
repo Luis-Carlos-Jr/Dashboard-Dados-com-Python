@@ -1,0 +1,4 @@
+pycountry
+streamlit
+pandas
+plotly.express
