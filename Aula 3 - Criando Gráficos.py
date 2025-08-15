@@ -296,26 +296,28 @@ ordem = df_limpo.groupby('senioridade')['usd'].mean().sort_values(ascending=Fals
 # fig.update_traces(textinfo='percent+label')
 # fig.show()
 
-# ----------- Pizza filtrado ----------
-#desafio de construis um gráfico de pizza de salário de cientistas de dados por país
+# ----------- Desafio ----------
+#desafio de construir um gráfico de salário de cientistas de dados filtrado por país
 
-# # Calcula a média de salário por senioridade em gráfico de pizza interativo
-# media = df_limpo.groupby("senioridade", as_index=False)["usd"].mean()#.sort_values(by="usd", ascending=False)
-#
-# # Ordena do maior para o menor
-# media = media.sort_values(by="usd", ascending=False)#.reset_index()
-#
-# #
-# contagem = df_limpo['remoto'].value_counts().reset_index()
-# contagem.columns = ['Tipo_trabalho', 'Quantidade']
-#
-# # Cria gráfico de barras
-# fig = px.pie(
-#     contagem,
-#     names = 'Tipo_trabalho',
-#     values = 'Quantidade',
-#     title='Porcentagem do tipo de trabalho',
-#     hole=0.5
-# )
-# fig.update_traces(textinfo='percent+label')
-# fig.show()
+# Calcula a média de salário por senioridade em gráfico de barras interativo
+df_filtrado = df_limpo[df_limpo['cargo'] == 'Data Scientist']
+media = df_filtrado.groupby("residencia", as_index=False)["usd"].mean().round(2)#.sort_values(by="usd", ascending=False)
+
+# Ordena do maior para o menor
+media = media.sort_values(by="usd", ascending=True)#.reset_index()
+
+# Cria gráfico de barras
+fig = px.bar(
+    media,
+    x="residencia",
+    y="usd",
+    text="usd",
+    title="Média Salarial por Senioridade",
+    labels={"senioridade": "Senioridade", "usd": "Salário Médio (USD)"},
+    color="residencia"
+)
+
+# Formata os valores no topo das barras
+fig.update_traces(texttemplate="$%{text:,.0f}", textposition="inside")
+
+fig.show()
