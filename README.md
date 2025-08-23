@@ -5,15 +5,7 @@
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
 Meu primeiro repositório no GitHub!  
-Projeto simples de **Dashboard de Dados** desenvolvido durante a **Imersão Alura**.  
-
-Este projeto permitiu meu **primeiro contato com Git, GitHub e Python**, além da interação com bibliotecas de análise e visualização de dados, como:
-
-- `pandas`  
-- `Matplotlib`  
-- `streamlit`  
-- `plotly`  
-- e outras  
+Projeto didático de **Dashboard de Dados** desenvolvido durante a **Imersão Alura**, com foco em aprendizado de Git, GitHub, Python e bibliotecas de análise de dados.
 
 ---
 
@@ -25,12 +17,35 @@ Este projeto permitiu meu **primeiro contato com Git, GitHub e Python**, além d
 ---
 
 ## 🛠 Tecnologias Utilizadas
-- Python  
-- Pandas  
-- Matplotlib  
-- Plotly  
-- Streamlit  
-- Git & GitHub  
+- **Python**  
+- **Pandas**  
+- **Matplotlib**  
+- **Plotly**  
+- **Streamlit**  
+- **Git & GitHub**
+
+---
+
+## 📂 Estrutura do Projeto
+- `Dashboard.py` → Script principal do dashboard.  
+- `Aula 3 - Criando Gráficos.py` → Exemplos de geração de gráficos.  
+- `Base_Dados.csv` → Base de dados usada no projeto.  
+- `requirements.txt` → Dependências necessárias para rodar o projeto.  
+
+---
+
+## 📊 Sobre os Dados
+A base utilizada (`Base_Dados.csv`) contém informações sobre **salários de profissionais de TI**, organizados por **cargo** e **país**.  
+> Obs.: a fonte original está no [Kaggle](https://www.kaggle.com/).
+
+---
+
+## 🎯 Objetivo
+O objetivo do projeto é **didático**, servindo como prática inicial em:  
+- Manipulação de dados com **Pandas**.  
+- Criação de visualizações com **Matplotlib** e **Plotly**.  
+- Desenvolvimento de aplicações interativas com **Streamlit**.  
+- Controle de versão com **Git & GitHub**.  
 
 ---
 
@@ -38,4 +53,4 @@ Este projeto permitiu meu **primeiro contato com Git, GitHub e Python**, além d
 
 1. **Clone o repositório**
 ```bash
-git clone https://github.com/seu-usuario/Dashboard-Dados-com-Python.git
+git clone https://github.com/Luis-Carlos-Jr/Dashboard-Dados-com-Python.git
